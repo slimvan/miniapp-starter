@@ -1,0 +1,132 @@
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.horizontal-view {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.horizontal-view-baseline {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.vertical-view {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical-view-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 通用按钮 */
+.common-button {
+  margin: 30rpx;
+  background: @mainColor;
+  font-size: 28rpx;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 90rpx;
+  height: 88rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* ios小黑条兼容 */
+.ios-safe-area-margin {
+  margin-bottom: calc(30rpx + constant(safe-area-inset-bottom)) !important;
+  /*兼容 IOS<11.2*/
+  margin-bottom: calc(30rpx + env(safe-area-inset-bottom)) !important;
+  /*兼容 IOS>11.2*/
+}
+
+/* ios小黑条兼容 */
+.ios-safe-area-padding {
+  padding-bottom: calc(30rpx + constant(safe-area-inset-bottom)) !important;
+  /*兼容 IOS<11.2*/
+  padding-bottom: calc(30rpx + env(safe-area-inset-bottom)) !important;
+  /*兼容 IOS>11.2*/
+}
+
+
+
+/* 底部按钮底边距 */
+.ios-safe-area-padding .common-button {
+  margin-bottom: 0 !important;
+}
+
+/* 标题1行 */
+.text-line-1 {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* 标题2行 */
+.text-line-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* 阴影 */
+.common-shadow {
+  -moz-box-shadow: 0 2px 8px #0000001A;
+  -webkit-box-shadow: 0 2px 8px #0000001A;
+  box-shadow: 0 2px 8px #0000001A;
+}
+
+.background-blur{
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(20px) !important;
+}
+
+/* 底部按钮容器 */
+.bottom-view {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  background-color: @pageColor !important;
+}
+
+
+/*悬浮按钮*/
+.fab-view {
+  position: fixed;
+  z-index: 99;
+  right: 30rpx;
+  bottom: 200rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-fab {
+  width: 110rpx;
+  height: 110rpx;
+  margin-top: 30rpx;
+  font-size: 28rpx;
+  color: white;
+  background-color: @mainColor;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  text-align: center;
+}

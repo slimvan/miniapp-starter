@@ -1,0 +1,30 @@
+<view class="item-view common-shadow" bindtap="onItemClick">
+    <view class="item-header-view item-warning">
+        <view class="item-order-sn">订单号：21378173812709</view>
+        <view class="item-status-title">已逾期</view>
+    </view>
+    <view class="item-content-view">
+        <view class="item-goods-view">
+            <block wx:for="{{3}}" wx:key="index">
+                <view class="goods-item-view">
+                    <image src="/images/common/ic_default_square.png" mode="aspectFill"
+                           class="goods-item-image"></image>
+                </view>
+            </block>
+        </view>
+        <view class="item-shop-view">
+            <view class="item-shop-title">华为旗舰店</view>
+            <view class="item-unit-number">北区 L4-506</view>
+        </view>
+        <view class="vertical-view">
+            <view class="item-cell-view">
+                <view class="item-cell-content">下单时间：2024-11-02 11:02</view>
+            </view>
+            <view class="item-cell-view">
+                <view class="item-cell-content">截止时间：2024-11-02 19:02</view>
+                <view class="item-cell-tag">已逾期 3小时5分钟</view>
+            </view>
+        </view>
+    </view>
+</view>
+

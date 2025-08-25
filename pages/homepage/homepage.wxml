@@ -1,0 +1,4 @@
+<!--pages/homepage/homepage.wxml-->
+<view class="container">
+    <view class="text">首页</view>
+</view>

@@ -1,0 +1,170 @@
+.form-view {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.cell-view {
+  display: flex;
+  align-items: flex-start;
+  padding: 30rpx;
+  border-bottom: 1px solid @dividerColor;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.cell-view-vertical {
+  flex-direction: column;
+  align-items: initial;
+}
+
+button {
+  .cell-view {
+    width: 100%;
+    border-bottom: 1px solid @dividerColor;
+
+    &:last-child {
+      border-bottom: 1px solid @dividerColor;
+    }
+  }
+}
+
+.icon-arrow {
+  align-self: center;
+}
+
+picker .cell-view:last-of-type {
+  border-bottom: 1px solid @dividerColor;
+}
+
+
+.cell-view-center {
+  align-items: center;
+}
+
+.common-title {
+  font-size: 28rpx;
+  color: @textColorMedium;
+}
+
+.common-content {
+  font-size: 28rpx;
+  color: @textColorDark;
+  flex: 1;
+  text-align: right;
+}
+
+.text-area {
+  height: 260rpx;
+  width: inherit;
+  border-radius: 15rpx;
+  padding: 20rpx 30rpx;
+  margin-top: 30rpx;
+  border: 1px solid @dividerColor;
+  box-sizing: border-box;
+  font-size: 30rpx;
+  color: @textColorDark;
+}
+
+.placeholder {
+  font-size: 30rpx;
+  color: @textColorMedium;
+  font-weight: normal;
+}
+
+.required {
+  color: var(--redColor);
+  font-size: 28rpx;
+  margin-left: 4rpx;
+}
+
+.icon-arrow-right {
+  width: 28rpx;
+  height: 28rpx;
+  margin-left: 20rpx;
+}
+
+.cell-view .icon-arrow-right {
+  align-self: center;
+}
+
+.switch-view {
+  margin-left: auto;
+}
+
+.common-choose-view {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 0;
+  flex: 1;
+  margin-left: 20rpx;
+  margin-bottom: -30rpx;
+}
+
+.common-choose-item-view {
+  font-size: 24rpx;
+  color: @textColorLight;
+  background-color: #f5f5f5;
+  border-radius: 90rpx;
+  padding: 6rpx 20rpx;
+  margin-left: 30rpx;
+  margin-bottom: 30rpx;
+}
+
+.common-choose-view .active {
+  background-color: @mainColor;
+  color: white;
+}
+
+
+.bottom-buttons-view {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 30rpx 0 30rpx;
+  border-top: 1px solid @dividerColor;
+
+}
+
+.button-primary {
+  margin-left: 30rpx;
+  background-color: @mainColor;
+  border: 1px solid @mainColor;
+  font-size: 28rpx;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 90rpx;
+  height: 88rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}
+
+.button-outline {
+  margin-left: 30rpx;
+  font-size: 28rpx;
+  color: @mainColor;
+  border: 1px solid @mainColor;
+  font-weight: 500;
+  text-align: center;
+  border-radius: 90rpx;
+  height: 88rpx;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+
+  &:first-child {
+    margin-left: 0;
+  }
+}

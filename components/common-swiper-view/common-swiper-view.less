@@ -1,0 +1,51 @@
+/* components/common-swiper-view/common-swiper-view.less */
+
+/* 轮播图 */
+.swiper-wrapper {
+  position: relative;
+  height: 360rpx;
+}
+
+.swiper-view {
+  height: 100%;
+}
+
+.swiper-item-view {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-item-image {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.mask-view {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 80rpx;
+  background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.icon-mute-view {
+  width: 50rpx;
+  height: 50rpx;
+  background-color: #00000080;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 30rpx;
+  bottom: 200rpx;
+
+  .icon-mute {
+    width: 30rpx;
+    height: 30rpx;
+  }
+}

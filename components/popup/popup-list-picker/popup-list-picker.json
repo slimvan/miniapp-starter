@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "t-popup": "tdesign-miniprogram/popup/popup",
+    "t-search": "tdesign-miniprogram/search/search"
+  }
+}

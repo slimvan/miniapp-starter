@@ -1,0 +1,64 @@
+<!-- pages/others/login/login.wxml -->
+<view class="container">
+    <image src="/images/ic_logo.png" mode="aspectFill" class="image-logo"></image>
+    <text class="welcome-text">欢迎登录\nAW经销商管理系统</text>
+    <!-- 短信验证码登录 -->
+    <view class="input-container" wx:if="{{isLoginBySMSCode}}">
+        <view class="login-input-view">
+            <t-icon name="mobile" size="34rpx" color="#FFFFFF"></t-icon>
+            <input class="input-content text-line-1" placeholder="请输入手机号" bindinput="onMobileInput"
+                   value="{{mobile}}" type="number"></input>
+        </view>
+        <view class="login-input-view">
+            <t-icon name="secured" size="34rpx" color="#FFFFFF"></t-icon>
+            <input class="input-content text-line-1" placeholder="请输入验证码" bindinput="onVerifyCode"
+                   value="{{verify_info.code}}"></input>
+            <image src="{{verify_info.url}}" mode="aspectFit" class="image-code" bindtap="getVerifyCode"></image>
+        </view>
+        <view class="login-input-view">
+            <t-icon name="key" size="34rpx" color="#FFFFFF"></t-icon>
+            <input class="input-content text-line-1" placeholder="请输入短信验证码" bindinput="onCodeInput"
+                   value="{{code}}"></input>
+            <view class="send-message-code" bindtap="{{send_code_enable?'onSendCodeClick':''}}">
+                {{send_code_enable ? '发送验证码' : count_down_time + '秒'}}
+            </view>
+        </view>
+    </view>
+
+
+    <!-- 登录按钮 -->
+    <view class="buttons-view">
+        <view class="button-default-clear common-button" bindtap="onLoginClick" wx:if="{{isLoginBySMSCode}}">
+            登录
+        </view>
+        <button class="button-default-clear common-button" open-type="getPhoneNumber"
+                bindgetphonenumber="onPhoneNumberGeted" wx:else>
+            快捷登录
+        </button>
+        <view class="buttons-mask-view" wx:if="{{!checked}}" catch:tap="onButtonsMaskClick"></view>
+    </view>
+
+    <!-- 隐私协议 -->
+    <view class="link-container" bind:tap="onLinkViewClick">
+        <checkbox class="checkbox" checked="{{checked}}" color="#ADBB5E"></checkbox>
+        <text class="agree-text">我已阅读并同意</text>
+        <text class="user-agreement" catchtap="onLinkClick">《用户协议及隐私政策》</text>
+    </view>
+
+    <!-- 内部系统提示 -->
+    <!--    <view class="hint-container">-->
+    <!--        <view class="hint-label-view">-->
+    <!--            <view class="hint-line"></view>-->
+    <!--            <view class="hint-label-text">提示</view>-->
+    <!--            <view class="hint-line"></view>-->
+    <!--        </view>-->
+    <!--        <view class="hint-content">本系统仅限内部人员使用，如有疑问请联系管理员。</view>-->
+    <!--    </view>-->
+    <view class="bottom-switch-view ios-safe-area-padding">
+        <view class="bottom-switch-text" bind:tap="onLoginTypeSwitch">
+            {{isLoginBySMSCode ? '快捷登录' : '手机验证码登录'}}
+        </view>
+        <view class="bottom-switch-view-divider"></view>
+        <view class="bottom-switch-text" bind:tap="onAgentApplyClick">申请成为经销商</view>
+    </view>
+</view>

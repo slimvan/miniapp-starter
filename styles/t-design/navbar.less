@@ -1,0 +1,34 @@
+page {
+  --td-navbar-bg-color: transparent; //导航栏背景色
+  --td-navbar-color: @textColorDark; //导航栏字体颜色
+}
+
+//导航栏吸顶
+.t-navbar-fixed {
+  position: absolute;
+  top: 0;
+}
+
+//导航栏增加柔和动画
+.t-navbar__content {
+  transition: all 0.3s ease;
+}
+
+// 页面滚动后状态
+.nav-scrolled {
+  color: @textColorDark !important;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+  &:extend(.background-blur);
+}
+
+// 页面滚动前状态
+.nav-normal {
+  background: transparent !important;
+  color: inherit;
+}
+
+.nav-theme-light {
+  .t-navbar__content {
+    color: white;
+  }
+}

@@ -1,0 +1,29 @@
+/* pages/others/article/article.wxss */
+
+page {
+    background-color: white;
+}
+
+.container {
+    padding: 30rpx 0;
+}
+
+.title {
+    font-size: 36rpx;
+    color: #333333;
+    font-weight: bold;
+    margin: 0 30rpx;
+}
+
+.subtitle {
+    font-size: 24rpx;
+    color: #666666;
+    margin-top: 20rpx;
+    margin-left: 30rpx;
+}
+
+.content_view {
+    margin-top: 30rpx;
+    color: #333333;
+    padding: 30rpx;
+}

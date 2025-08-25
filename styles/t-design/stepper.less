@@ -1,0 +1,29 @@
+
+.t-class-input {
+  border-radius: 90rpx;
+  background-color: #EEEEEE;
+}
+
+.t-class-minus, .t-class-plus {
+  border-radius: 50%;
+  color: @textColorLight;
+  border: 2rpx solid @textColorLight;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.active {
+  .t-class-input {
+    border-radius: 90rpx;
+    background-color: #EEEEEE;
+  }
+
+  .t-class-minus, .t-class-plus {
+    border-radius: 50%;
+    background-color: @mainColor;
+    color: white;
+  }
+}

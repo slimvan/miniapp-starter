@@ -1,0 +1,26 @@
+<view class="item-view common-shadow">
+    <view class="item-header-view">
+        <view class="item-order-sn">订单号：21378173812709</view>
+        <view class="item-status-title">待提货</view>
+    </view>
+    <view class="item-content-view">
+        <view class="item-goods-view">
+            <block wx:for="{{3}}" wx:key="index">
+                <view class="goods-item-view">
+                    <image src="/images/common/ic_default_square.png" mode="aspectFill"
+                           class="goods-item-image"></image>
+                </view>
+            </block>
+        </view>
+        <view class="item-customer-view">
+            <view class="item-customer-content">A柜 17号</view>
+        </view>
+        <view class="vertical-view">
+            <view class="item-cell-view">
+                <view class="item-cell-content">下单时间：2024-11-02 11:02</view>
+                <view class="item-button" bindtap="onItemButtonClick">确认提货</view>
+            </view>
+        </view>
+    </view>
+</view>
+

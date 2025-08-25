@@ -1,0 +1,8 @@
+<!--pages/others/article/article.wxml-->
+<view class="container">
+    <view class="title">{{info.title}}</view>
+    <view class="subtitle">{{info.updated_at}}</view>
+    <view class="content_view">
+        <mp-html content="{{info.content}}" copy-link="{{false}}" bindlinktap="onLinkTap"></mp-html>
+    </view>
+</view>

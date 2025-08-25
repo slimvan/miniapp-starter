@@ -1,0 +1,6 @@
+<!--component/label-view/label-view.wxml-->
+<view class="label-view">
+    <view class="label-title" style="font-size: {{fontSize}}">{{title}}</view>
+    <view wx:if="{{showMore}}" class="more-text" bindtap="onMoreClick">查看更多</view>
+    <slot name="right"></slot>
+</view>

@@ -1,0 +1,35 @@
+/* components/popup/popup-list-picker/popup-list-picker.wxss */
+
+.header-view {
+  padding: 30rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-view {
+  min-height: 1000rpx;
+  max-height: 1000rpx;
+
+  .list-view {
+    display: flex;
+    flex-direction: column;
+
+    .item-view {
+      display: flex;
+      align-items: center;
+      padding: 30rpx;
+      border-bottom: 1px solid @dividerColor;
+
+      .item-title {
+        font-size: 28rpx;
+        color: @textColorMedium;
+        flex: 1;
+      }
+
+      .icon-check {
+        margin-left: 20rpx;
+        flex-shrink: 0;
+      }
+    }
+  }
+}

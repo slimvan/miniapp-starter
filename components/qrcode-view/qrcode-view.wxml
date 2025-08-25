@@ -1,0 +1,2 @@
+<!--component/qrcode-view/qrcode-view.wxml-->
+<image src="{{url}}" style="width:{{width}}rpx;height:{{height}}rpx;"></image>

@@ -1,0 +1,65 @@
+/* 处理英文数字文本不换行 */
+view {
+  word-break: break-all;
+}
+
+text {
+  word-break: break-all;
+}
+
+text {
+  white-space: pre-wrap;
+}
+
+/* 清除按钮默认样式 */
+.button-default-clear {
+  font-weight: 400 !important;
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: auto !important;
+  line-height: initial !important;
+  text-align: left !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.button-default-clear::after {
+  border: none !important;
+}
+
+/* progress已完成进度圆角 */
+.wx-progress-inner-bar {
+  border-radius: 90rpx;
+}
+
+/* checkbox */
+.checkbox .wx-checkbox-input {
+  border-radius: 50%; /* 圆角 */
+  width: 24rpx; /* 背景的宽 */
+  height: 24rpx; /* 背景的高 */
+  border: 2rpx solid @mainColor;
+  line-height: 1 !important;
+  margin-bottom: 4rpx;
+}
+
+.checkbox .wx-checkbox-input-disabled {
+  border-radius: 50%; /* 圆角 */
+  width: 24rpx; /* 背景的宽 */
+  height: 24rpx; /* 背景的高 */
+  background: #f3f3f3;
+  border: 1px solid rgba(201, 201, 201, 1);
+}
+
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+  background: @mainColor;
+}
+
+.checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+  width: 24rpx;
+  height: 24rpx;
+  font-size: 24rpx;
+  color: #fff;
+  background: transparent;
+}

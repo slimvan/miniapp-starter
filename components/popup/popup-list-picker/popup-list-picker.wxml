@@ -1,0 +1,24 @@
+<!--components/popup/popup-list-picker/popup-list-picker.wxml-->
+<t-popup
+        visible="{{show}}"
+        bind:visible-change="onVisibleChange"
+        placement="bottom">
+    <view class="vertical-view">
+        <view class="header-view">
+            <t-search placeholder="搜索" bindsubmit="onSearchConfirm" bindclear="onSearchClear"/>
+        </view>
+        <scroll-view class="scroll-view" scroll-y bindscrolltolower="onScrollToLower">
+            <view class="list-view">
+                <block wx:for="{{list}}" wx:key="index">
+                    <view class="item-view" bindtap="onItemClick" data-item="{{item}}">
+                        <view class="item-title">{{item.title}}</view>
+                        <t-icon wx:if="{{item.selected}}" class="icon-check" name="check" color="#333333"
+                                size="36rpx"></t-icon>
+                    </view>
+                </block>
+                <empty-view wx:if="{{list.length===0}}"></empty-view>
+                <loading-view wx:if="{{isLoadingMore}}"></loading-view>
+            </view>
+        </scroll-view>
+    </view>
+</t-popup>

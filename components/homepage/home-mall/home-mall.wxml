@@ -1,0 +1,18 @@
+<view class="container">
+    <view class="header-view">
+        <t-search placeholder="请输入关键字搜索"/>
+    </view>
+    <t-tabs value="{{currentTabIndex}}"
+            bottom-line-mode="auto"
+            bind:change="onTabsChanged">
+        <t-tab-panel label="待取货" value="{{0}}"/>
+        <t-tab-panel label="待提货" value="{{1}}"/>
+        <t-tab-panel label="全部订单" value="{{2}}"/>
+    </t-tabs>
+    <view class="list-view">
+        <item-order-waiting wx:if="{{currentTabIndex===0 || currentTabIndex===2}}" item="{{item}}"></item-order-waiting>
+        <item-order-pending wx:if="{{currentTabIndex===1 || currentTabIndex===2}}"
+                            item="{{item}}"></item-order-pending>
+    </view>
+</view>
+

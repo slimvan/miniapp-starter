@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "common-swiper-view": "/components/common-swiper-view/common-swiper-view"
+  }
+}
+

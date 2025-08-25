@@ -1,0 +1,51 @@
+<!--components/common-swiper-view/common-swiper-view.wxml-->
+<!-- 轮播图 -->
+<view wx:if="{{list.length>0}}" class="swiper-wrapper custom-class" style="height:{{height}}">
+    <swiper class="swiper-view"
+            current="{{current}}"
+            indicator-dots="{{indicator||list.length>1}}"
+            indicator-active-color="#74874F"
+            autoplay="{{list[current].is_video!==1 && !isPlaying}}"
+            interval="{{interval}}"
+            circular="{{circular}}"
+            bindchange="onSwiperChange"
+    >
+        <block wx:for="{{list}}" wx:key="index">
+            <swiper-item class="swiper-item-view">
+                <block wx:if="{{type==='album'}}">
+                    <video wx:if="{{item.is_video===1}}"
+                           id="video-{{index}}"
+                           class="swiper-item-image"
+                           src="{{item.file_url}}"
+                           autoplay="{{true}}"
+                           controls="{{false}}"
+                           muted="{{muted}}"
+                           catchtap="onSlideItemClick"
+                           data-item="{{item}}"
+                           data-index="{{index}}"
+                           bindplay="onVideoPlay"
+                           bindended="onVideoEnded"
+                    >
+                        <view class="icon-mute-view" catchtap="onMuteClick">
+                            <image src="{{muted?'/images/ic_volume_off.png':'/images/ic_volume_on.png'}}"
+                                   mode="aspectFit" class="icon-mute"></image>
+                        </view>
+                    </video>
+                    <image wx:else src="{{item.img_url || item.file_url || '/images/common/ic_default_wide.png'}}"
+                           mode="aspectFill"
+                           class="swiper-item-image"
+                           bindtap="onSlideItemClick"
+                           data-item="{{item}}"
+                    >
+                    </image>
+                </block>
+                <image wx:else src="{{item.img_url || item.file_url || '/images/common/ic_default_wide.png'}}"
+                       mode="aspectFill"
+                       class="swiper-item-image"
+                       bindtap="onSlideItemClick"
+                       data-item="{{item}}"></image>
+            </swiper-item>
+        </block>
+    </swiper>
+    <view wx:if="{{mask}}" class="mask-view"></view>
+</view>

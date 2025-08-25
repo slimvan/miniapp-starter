@@ -1,0 +1,14 @@
+<!--component/photo-selector/photo-selector.wxml-->
+<view class="photo-view">
+    <block wx:for="{{list}}" wx:key="index">
+        <view class="photo-item-view">
+            <image src="{{item.path || item.url}}" mode="aspectFill" class="photo-item-image"
+                   catchtap="onPhotoItemClick" data-item="{{item}}"></image>
+            <image src="./images/ic_delete.png" mode="aspectFit" class="photo-item-delete" data-item="{{item}}"
+                   catchtap="onPhotoItemDeleteClick" data-index="{{index}}" wx:if="{{!isView}}"></image>
+        </view>
+    </block>
+    <view class="photo-item-view" bindtap="onPhotoAddClick" wx:if="{{list.length<limit && !isView}}">
+        <image src="./images/ic_add.png" mode="aspectFit" class="photo-item-image"></image>
+    </view>
+</view>

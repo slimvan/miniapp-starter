@@ -1,0 +1,4 @@
+<!--components/footer-view/footer-view.wxml-->
+<view class="vertical-view">
+    <image src="{{src}}" mode="aspectFill" class="image-footer"></image>
+</view>

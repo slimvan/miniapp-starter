@@ -1,0 +1,14 @@
+<!--component/file-selector/file-selector.wxml-->
+<view class="file-view">
+    <block wx:for="{{list}}" wx:key="index">
+        <view class="file-item-view">
+            <image src="{{item.icon || item.url || item.file_url || item.path  }}" mode="aspectFill" class="file-item-image"
+                   catchtap="onFileItemClick" data-item="{{item}}"></image>
+            <image src="./images/ic_delete.png" mode="aspectFit" class="file-item-delete"
+                   catchtap="onFileItemDeleteClick" data-index="{{index}}" wx:if="{{!isView}}"></image>
+        </view>
+    </block>
+    <view class="file-item-view" bindtap="onFileAddClick" wx:if="{{list.length<limit && !isView}}">
+        <image src="{{addIcon||'./images/ic_add.png'}}" mode="aspectFit" class="file-item-image"></image>
+    </view>
+</view>

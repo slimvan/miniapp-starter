@@ -1,0 +1,30 @@
+{
+  "pages": [
+    "pages/homepage/homepage",
+    "pages/others/article/article",
+    "pages/others/webview/webview",
+    "pages/others/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#f8f8f8",
+    "navigationBarTitleText": "项目名称",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#ffffff"
+  },
+  
+  
+  "resolveAlias": {
+    "@/*": "/*"
+  },
+  "sitemapLocation": "sitemap.json",
+  
+  "lazyCodeLoading": "requiredComponents",
+  "rendererOptions": {
+    "skyline": {
+      "disableABTest": true,
+      "defaultDisplayBlock": true,
+      "defaultContentBox": true
+    }
+  }
+}

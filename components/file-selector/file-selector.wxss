@@ -1,0 +1,30 @@
+/* component/file-selector/file-selector.wxss */
+
+.file-view {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30rpx;
+}
+
+.file-item-view {
+    width: 160rpx;
+    height: 160rpx;
+    position: relative;
+    margin: 0 30rpx 30rpx 0;
+}
+
+.file-item-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 15rpx;
+    overflow: hidden;
+}
+
+.file-item-delete {
+    width: 36rpx;
+    height: 36rpx;
+    position: absolute;
+    right: -14rpx;
+    top: -14rpx;
+    z-index: 2;
+}

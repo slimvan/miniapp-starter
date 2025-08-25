@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "dayjs": "^1.11.13",
+    "tdesign-miniprogram": "^1.9.7",
+    "umtrack-wx": "^2.8.0"
+  }
+}

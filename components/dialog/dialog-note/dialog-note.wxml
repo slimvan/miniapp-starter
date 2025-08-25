@@ -1,0 +1,16 @@
+<!--components/dialog/dialog-note/dialog-note.wxml-->
+<t-dialog
+        visible="{{show}}"
+        title="备注"
+        confirm-btn="确定"
+        cancel-btn="取消"
+        bind:confirm="onNoteDialogConfirm"
+        bind:cancel="onNoteDialogCancel">
+    <t-textarea
+            slot="content"
+            t-class="dialog-textarea"
+            placeholder="请输入备注"
+            bindchange="onNoteInput"
+            value="{{temp_content}}"
+            disableDefaultPadding="{{true}}"/>
+</t-dialog>

@@ -1,0 +1,36 @@
+module.exports = {
+    /**
+     * 显示用户角色
+     * @param roles 用户角色列表
+     */
+    roleTitle: function (roles) {
+        return roles.map(function (item) {
+            return item.title;
+        }).join(' | ');
+    },
+
+    /**
+     * 显示区域名称
+     * @param regions 区域标题数组
+     */
+    regionTitle: function (regions) {
+        if (!regions || regions.length === 0 || regions.every(function (item) {
+            return item === ''
+        })) {
+            return '';
+        }
+        return regions.map(function (item) {
+            return item;
+        }).join(' | ')
+    },
+
+    /**
+     * 判断某一位是否开启
+     * @param {number} value - 十进制配置值
+     * @param {number} bitIndex - 位索引（0表示第一位）
+     * @returns {boolean}
+     */
+    isBitOn: function (value, bitIndex) {
+        return (value & (1 << bitIndex)) !== 0;
+    },
+}

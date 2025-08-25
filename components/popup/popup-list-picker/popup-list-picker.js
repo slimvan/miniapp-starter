@@ -1,0 +1,110 @@
+// components/popup/popup-list-picker/popup-list-picker.js
+const PageUtil = require("@/utils/PageUtil")
+Component({
+
+    /**
+     * 组件的属性列表
+     */
+    properties: {
+        show: {
+            type: Boolean,
+            value: false
+        },
+        url: {
+            type: String,
+            value: ''
+        },
+        params: {
+            type: Object,
+            value: {}
+        }
+    },
+
+    /**
+     * 组件的初始数据
+     */
+    data: {
+        list: [],
+        keyword: '',
+    },
+
+    /**
+     * 组件的方法列表
+     */
+    methods: {
+
+        /**
+         * 物流公司列表
+         */
+        async getListData(isLoadMore) {
+            let list = await PageUtil.getListData({
+                url: this.data.url,
+                params: {
+                    ...this.data.params,
+                    kw: this.data.keyword,
+                },
+                list: this.data.list,
+                pageHost: this,
+                isLoadMore: isLoadMore,
+            })
+            this.setData({
+                list: list,
+            })
+        },
+
+        /**
+         * 弹窗显示状态改变
+         */
+        onVisibleChange(e) {
+            this.setData({
+                show: e.detail.value
+            })
+            if (!this.data.show) {
+                this.triggerEvent('close')
+            }
+        },
+
+        /**
+         * 列表滚动到底部
+         */
+        onScrollToLower() {
+            this.getListData(true)
+        },
+
+        /**
+         * 列表项点击
+         */
+        onItemClick(e) {
+            let item = e.currentTarget.dataset.item
+            this.triggerEvent('confirm', {
+                value: item
+            })
+        },
+
+        /**
+         * 搜索确认
+         */
+        onSearchConfirm(e) {
+            this.setData({
+                keyword: e.detail.value
+            })
+            this.getListData()
+        },
+
+        /**
+         * 搜索取消
+         */
+        onSearchClear(e) {
+            this.setData({
+                keyword: e.detail.value
+            })
+            this.getListData()
+        }
+    },
+
+    lifetimes: {
+        attached() {
+            this.getListData()
+        }
+    }
+})
