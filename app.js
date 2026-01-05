@@ -2,6 +2,7 @@
 // npm install umtrack-wx@latest --save
 const AppUtil = require("@/utils/AppUtil")
 const Config = require("@/utils/Config")
+const Constant = require("@/utils/Constant")
 const NetworkUtil = require("@/utils/NetworkUtil")
 const WxNotificationCenter = require("@/utils/WxNotificationCenter")
 const LoginUtil = require("@/utils/LoginUtil")
@@ -37,8 +38,8 @@ App({
         }, this)
 
         //清除旧的token 每次启动都获取新token
-        // wx.removeStorageSync("access_token")
-        // await NetworkUtil.getToken()
+        wx.removeStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN)
+        await NetworkUtil.getToken()
     },
 
     /**

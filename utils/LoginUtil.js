@@ -1,19 +1,28 @@
 const Config = require("@/utils/Config");
+const Constant = require("@/utils/Constant");
 const NetworkUtil = require("@/utils/NetworkUtil");
+const StorageUtil = require("@/utils/StorageUtil");
 
 const LoginUtil = {
     /**
      * 判断是否登录
-     * @param {boolean} route 是否跳转到登录页面
+     * @param {boolean} options.route 是否跳转到登录页面
+     * @param {boolean} options.redirect 是否重定向到登录页面
      * @returns {boolean} 是否已登录
      */
-    isLogin(route = true) {
-        const mobile = wx.getStorageSync('mobile');
+    isLogin(options = {route: true, redirect: false}) {
+        const mobile = wx.getStorageSync(Constant.STORAGE_KEY_MOBILE);
         if (!mobile) {
-            if (route) {
-                wx.navigateTo({
-                    url: '/pages/others/login/login',
-                });
+            if (options.route) {
+                if (options.redirect) {
+                    wx.redirectTo({
+                        url: '/pages/others/login/login',
+                    });
+                } else {
+                    wx.navigateTo({
+                        url: '/pages/others/login/login',
+                    });
+                }
             }
             return false;
         }
@@ -26,16 +35,15 @@ const LoginUtil = {
      */
     saveLoginData(res) {
         const {mobile, access_token} = res.data;
-        wx.setStorageSync('mobile', mobile);
-        wx.setStorageSync('access_token', access_token);
+        wx.setStorageSync(Constant.STORAGE_KEY_MOBILE, mobile);
+        wx.setStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN, access_token);
     },
 
     /**
      * 清除登录信息
      */
     clearLoginData() {
-        wx.removeStorageSync('access_token');
-        wx.removeStorageSync('mobile');
+        StorageUtil.clearLoginData();
     },
 
     /**
@@ -82,7 +90,7 @@ const LoginUtil = {
      * @returns {Promise<Object>} 用户信息
      */
     async getUserInfo(forceRefresh = false) {
-        const cachedUserInfo = wx.getStorageSync('user_info');
+        const cachedUserInfo = wx.getStorageSync(Constant.STORAGE_KEY_USER_INFO);
         if (cachedUserInfo && !forceRefresh) {
             return cachedUserInfo;
         }
@@ -92,8 +100,14 @@ const LoginUtil = {
                 url: "/account/info",
             });
             if (res.error === 0) {
-                wx.setStorageSync('user_info', res.data);
+                wx.setStorageSync(Constant.STORAGE_KEY_USER_INFO, res.data);
                 return res.data;
+            } else {
+                wx.showToast({
+                    title: res.msg,
+                    icon: 'none',
+                });
+                return {};
             }
         } catch (error) {
             wx.showToast({

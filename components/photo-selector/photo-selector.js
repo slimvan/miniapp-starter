@@ -20,6 +20,11 @@ Component({
         list: {
             type: Array,
             value: [],
+        },
+        //图片选择的来源，可选值：['album', 'camera']，默认 ['album', 'camera']
+        sourceType: {
+            type: Array,
+            value: ['album', 'camera'],
         }
     },
 
@@ -37,7 +42,7 @@ Component({
         //图片添加
         onPhotoAddClick: async function (e) {
             try {
-                let result = await ImageUtil.chooseImage(this.data.limit, this.data.list)
+                let result = await ImageUtil.chooseImage(this.data.limit, this.data.list, this.data.sourceType)
                 this.setData({
                     list: this.data.list.concat(result)
                 })
@@ -53,8 +58,8 @@ Component({
         onPhotoItemClick: function (e) {
             let item = e.currentTarget.dataset.item
             wx.previewImage({
-                current: item.path || item.url,
-                urls: this.data.list.map(item => item.path || item.url),
+                current: item.url || item.path,
+                urls: this.data.list.map(item => item.url || item.path),
             });
         },
 

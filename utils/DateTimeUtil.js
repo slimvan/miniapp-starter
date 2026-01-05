@@ -1,4 +1,6 @@
 const dayjs = require('dayjs')
+const duration = require('@/utils/dayjs/plugin/duration')
+dayjs.extend(duration)
 const DateTimeUtil = {
 
     /**
@@ -32,7 +34,30 @@ const DateTimeUtil = {
     getWeekDayStr(dayIndex) {
         const weekMap = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
         return weekMap[dayIndex]
-    }
+    },
+
+    /**
+     * 格式化剩余时间
+     * @param deadline 超时时间
+     */
+    deadlineFormat(deadline) {
+        const now = dayjs()
+        const diff = deadline.diff(now)
+
+        if (diff <= 0) return ""
+
+        const d = dayjs.duration(diff)
+        const days = Math.floor(d.asDays()) // 整天
+        const hours = d.hours()
+        const minutes = d.minutes()
+
+        let result = ""
+        if (days > 0) result += `${days}天`
+        if (hours > 0) result += `${hours}小时`
+        if (minutes > 0) result += `${minutes}分钟`
+
+        return result || "不到1分钟"
+    },
 }
 
 module.exports = DateTimeUtil;

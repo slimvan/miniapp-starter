@@ -1,4 +1,6 @@
 const Config = require("@/utils/Config")
+const Constant = require("@/utils/Constant")
+const StorageUtil = require("@/utils/StorageUtil")
 
 let tokenPromise = null // 全局唯一变量，用于存储 token 请求的 Promise 对象
 let errorModalShowed = false
@@ -27,14 +29,14 @@ const NetworkUtil = {
 
         if (!ignoreToken) {
             // 如果没有 token，且 tokenPromise 为空，则发起 token 请求
-            if (!wx.getStorageSync("access_token") && tokenPromise == null) {
+            if (!wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN) && tokenPromise == null) {
                 tokenPromise = await this.getToken()
             }
 
             // 等待 tokenPromise，防止异步调用多个请求，保证getToken()优先执行
             if (tokenPromise) {
                 await tokenPromise
-                console.log('获取到access_token', wx.getStorageSync("access_token"))
+                console.log('获取到access_token', wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN))
                 tokenPromise = null
             }
         }
@@ -50,12 +52,14 @@ const NetworkUtil = {
                 header: {
                     "content-type": "application/json",
                     "app-alias": Config.APP_ALIAS,
-                    "access-token": wx.getStorageSync("access_token"),
+                    "access-token": wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN),
                 },
                 data: finalParams,
                 success: (res) => {
                     if (res.statusCode === 200) {
                         if (res.data && !this.checkBusinessError(res.data)) {
+                            // 业务错误已被处理（已弹窗提示），reject Promise 让调用方能够捕获
+                            reject({handled: true})
                             return
                         }
                         resolve(res.data)
@@ -64,6 +68,9 @@ const NetworkUtil = {
                     }
                 },
                 fail: (res) => this.handleError(res, reject),
+                complete: () => {
+                    wx.hideLoading()
+                }
             })
         })
 
@@ -126,10 +133,18 @@ const NetworkUtil = {
      * @returns {boolean} true: 正常请求，false: 拦截异常
      */
     checkBusinessError(resData) {
+        // 405 后台系统错误
+        if (resData.error === 405) {
+            this.showErrorModal(resData.msg)
+            return false
+        }
+
         // 40000~41000之间
         if (resData.error >= 40000 && resData.error <= 41000) {
+            // 清除登录状态
+            StorageUtil.clearLoginData()
             this.showErrorModal(resData.msg, () => {
-                wx.navigateTo({
+                wx.redirectTo({
                     url: "/pages/others/login/login",
                 })
             })
@@ -154,7 +169,9 @@ const NetworkUtil = {
                 success: function (res) {
                     if (res.confirm) {
                         errorModalShowed = false
-                        callback()
+                        if (callback) {
+                            callback()
+                        }
                     }
                 },
             })
@@ -186,7 +203,7 @@ const NetworkUtil = {
                 })
 
                 if (result.error === 0) {
-                    wx.setStorageSync("access_token", result.data.access_token)
+                    wx.setStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN, result.data.access_token)
                     wx.setStorageSync("mobile", result.data.mobile)
                 }
 
@@ -215,7 +232,7 @@ const NetworkUtil = {
                 formData: params,
                 header: {
                     "app-alias": Config.APP_ALIAS,
-                    "access-token": wx.getStorageSync("access_token"),
+                    "access-token": wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN),
                 },
                 success: (res) => {
                     console.log(res)

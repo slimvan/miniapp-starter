@@ -16,65 +16,9 @@ const RouteUtil = {
                             url: item.url,
                         })
                         break;
-                    case 1: //自助集星
-                        wx.openEmbeddedMiniProgram({
-                            appId: Config.APP_ID_MIXC,
-                            path: `/pages/autoPoint/index?type=0&mallNo=${Config.PROJECT_CODE}`,
-                            allowFullScreen: true,
-                            envVersion: Config.ENV.NAME
-                        })
-                        break;
-                    case 2: //找店导览
-                        wx.openEmbeddedMiniProgram({
-                            appId: Config.APP_ID_MIXC,
-                            path: `/pages/shop/findShop/index?mallNo=${Config.PROJECT_CODE}`,
-                            allowFullScreen: true,
-                            envVersion: Config.ENV.NAME
-                        })
-                        break;
-                    case 3: //停车服务
+                    case 1: //文章详情
                         wx.navigateTo({
-                            url: `/packageParking/pages/homepage/homepage`
-                        })
-                        break;
-                    case 4: //文体订场
-                        this.culturalSports()
-                        break;
-                    case 5: //积分商城
-                        wx.showToast({
-                            title: '功能尚未开放',
-                            icon: 'none'
-                        })
-                        break;
-                    case 6: //会员权益
-                        wx.switchTab({
-                            url: `/pages/service/service`
-                        })
-                        break;
-                    case 7: //物品租借
-                        wx.openEmbeddedMiniProgram({
-                            appId: Config.APP_ID_MIXC,
-                            path: `/pages/lease/list/index?mallNo=${Config.PROJECT_CODE}`,
-                            allowFullScreen: true,
-                            envVersion: Config.ENV.NAME
-                        })
-                        break;
-                    case 8: //投诉反馈 跳转微信原生能力
-                        break
-                    case 9: //积分明细
-                        wx.openEmbeddedMiniProgram({
-                            appId: Config.APP_ID_MIXC,
-                            path: `/pages/pointList/main?mallNo=${Config.PROJECT_CODE}`,
-                            allowFullScreen: true,
-                            envVersion: Config.ENV.NAME
-                        })
-                        break
-                    case 10: //万象星兑礼
-                        wx.openEmbeddedMiniProgram({
-                            appId: Config.APP_ID_MIXC,
-                            path: `/pages/goods/goodsList/index?type=5&mallNo=${Config.PROJECT_CODE}`,
-                            allowFullScreen: true,
-                            envVersion: Config.ENV.NAME
+                            url: `/pages/others/article/article?alias=${item.type_item_alias}`,
                         })
                         break
                 }
@@ -88,13 +32,28 @@ const RouteUtil = {
                 })
                 break;
             case 3: //其他小程序
-                wx.openEmbeddedMiniProgram({
+                wx.navigateToMiniProgram({
                     appId: item.jump_appid,
                     path: item.url,
                     allowFullScreen: true,
                     envVersion: Config.ENV.NAME,
+                    extraData: JSON.parse(item.extra_data),
                     fail(error) {
                         console.log(error)
+                    }
+                })
+                break;
+            case 4: //视频预览
+                wx.previewMedia({
+                    sources: [{
+                        url: item.url,
+                        type: 'video'
+                    }],
+                    fail(error) {
+                        wx.showToast({
+                            title: error.errMsg,
+                            icon: 'none'
+                        })
                     }
                 })
                 break;
@@ -138,51 +97,6 @@ const RouteUtil = {
             }
         })
     },
-
-
-    /**
-     * 跳转文体订场
-     */
-    async culturalSports() {
-        let res = await NetworkUtil.get({
-            url: "oauth/wentihui-authorization",
-        })
-        wx.navigateToMiniProgram({
-            appId: Config.APP_ID_CULTURAL_SPORTS,
-            path: 'pages/oauth/authorize',//双方约定授权请求路径（固定值）
-            extraData: res.data.extraData,
-            envVersion: Config.ENV.NAME,
-        })
-    },
-
-    /**
-     * 优惠信息点击
-     */
-    promotionItemClick(item) {
-        switch (item.type_id) {
-            case 1: // 优惠详情
-                wx.navigateTo({
-                    url: `/pages/others/article/article?alias=${item.alias}&url=${encodeURIComponent('promotion/view')}`
-                })
-                break;
-            case 2: //外部链接
-                wx.navigateTo({
-                    url: `/pages/others/webview/webview?url=${encodeURIComponent(item.url)}`
-                })
-                break;
-            case 3: //半屏跳转小程序
-                wx.openEmbeddedMiniProgram({
-                    appId: item.jump_appid,
-                    path: item.url,
-                    allowFullScreen: true,
-                    envVersion: Config.ENV.NAME,
-                    fail(error) {
-                        console.log(error)
-                    }
-                })
-                break
-        }
-    }
 
 }
 

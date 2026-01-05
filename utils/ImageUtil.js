@@ -7,10 +7,11 @@ const ImageUtil = {
      * 选择图片
      * @param {number} limit 上限数量
      * @param {Array} list 已选择的列表
+     * @param {Array} sourceType 图片选择的来源，可选值：['album', 'camera']，默认 ['album', 'camera']
      * @returns {Promise<*>}
      */
-    async chooseImage(limit, list) {
-        return this.chooseMedia(limit, ['image'], ['album', 'camera'], list);
+    async chooseImage(limit, list, sourceType = ['album', 'camera']) {
+        return this.chooseMedia(limit, ['image'], sourceType, list);
     },
 
     /**

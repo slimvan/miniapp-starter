@@ -1,5 +1,6 @@
 // components/popup/popup-list-picker/popup-list-picker.js
 const PageUtil = require("@/utils/PageUtil")
+const Constant = require("@/utils/Constant")
 Component({
 
     /**
@@ -17,6 +18,32 @@ Component({
         params: {
             type: Object,
             value: {}
+        },
+        keyValue: {
+            type: String,
+            value: ''
+        },
+        keyField: {
+            type: String,
+            value: 'alias'
+        },
+        titleField: {
+            type: String,
+            value: 'title'
+        },
+    },
+
+    observers: {
+        'url, params': function (url, params) {
+            if (url) {
+                this.setData({
+                    list: [],
+                    list_info: {},
+                    keyword: '',
+                }, () => {
+                    this.getListData()
+                })
+            }
         }
     },
 
@@ -24,7 +51,11 @@ Component({
      * 组件的初始数据
      */
     data: {
+        Constant,
         list: [],
+        list_info: {},
+        isRequesting: false,
+        isLoadingMore: false,
         keyword: '',
     },
 
@@ -41,12 +72,23 @@ Component({
                 url: this.data.url,
                 params: {
                     ...this.data.params,
-                    kw: this.data.keyword,
+                    keyword: this.data.keyword,
                 },
                 list: this.data.list,
                 pageHost: this,
                 isLoadMore: isLoadMore,
             })
+            
+            // 根据keyValue和keyField设置选中状态
+            if (this.data.keyValue && this.data.keyField) {
+                list = list.map(item => {
+                    return {
+                        ...item,
+                        selected: item[this.data.keyField] === this.data.keyValue
+                    }
+                })
+            }
+            
             this.setData({
                 list: list,
             })
@@ -104,7 +146,7 @@ Component({
 
     lifetimes: {
         attached() {
-            this.getListData()
+            // this.getListData() // 由 observer 处理
         }
-    }
+    },
 })

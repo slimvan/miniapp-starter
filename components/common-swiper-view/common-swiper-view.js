@@ -105,21 +105,22 @@ Component({
          * 轮播图切换
          */
         onSwiperChange(e) {
-            this.setData({
-                current: e.detail.current,
-            })
-
-            //处理轮播图中视频循环第二次不会自动播放的问题
-            let item = this.data.list[e.detail.current]
-            if (item.is_video === 1) {
-                let videoContext = wx.createVideoContext(`video-${e.detail.current}`, this)
-                videoContext.seek(0)
-                videoContext.play()
-            } else {
+            if (e.detail.source === 'touch' || e.detail.source === 'autoplay') {
                 this.setData({
-                    muted: true,
-                    isPlaying: false
+                    current: e.detail.current,
                 })
+                //处理轮播图中视频循环第二次不会自动播放的问题
+                let item = this.data.list[e.detail.current]
+                if (item.is_video === 1) {
+                    let videoContext = wx.createVideoContext(`video-${e.detail.current}`, this)
+                    videoContext.seek(0)
+                    videoContext.play()
+                } else {
+                    this.setData({
+                        muted: true,
+                        isPlaying: false
+                    })
+                }
             }
         },
 
