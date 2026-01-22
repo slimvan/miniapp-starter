@@ -28,16 +28,14 @@ const NetworkUtil = {
         }
 
         if (!ignoreToken) {
-            // 如果没有 token，且 tokenPromise 为空，则发起 token 请求
-            if (!wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN) && tokenPromise == null) {
-                tokenPromise = await this.getToken()
-            }
-
-            // 等待 tokenPromise，防止异步调用多个请求，保证getToken()优先执行
-            if (tokenPromise) {
-                await tokenPromise
-                console.log('获取到access_token', wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN))
-                tokenPromise = null
+            // 如果没有 token，自动获取（getToken 内部已处理防重复）
+            if (!wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN)) {
+                try {
+                    await this.getToken()
+                    console.log('获取到access_token', wx.getStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN))
+                } catch (e) {
+                    console.error('自动获取Token失败:', e)
+                }
             }
         }
 
@@ -179,15 +177,19 @@ const NetworkUtil = {
     },
 
     /**
-     * 获取 token
+     * 获取 token (静默登录)
      */
     async getToken() {
+        // 如果已经有正在进行的 token 请求，直接返回该 Promise
         if (tokenPromise) {
-            return tokenPromise
+            console.log('检测到正在进行的token请求，等待其完成')
+            return await tokenPromise
         }
 
+        // 创建新的 token 请求 Promise
         tokenPromise = (async () => {
             try {
+                console.log('开始获取token')
                 const code = await new Promise((resolve, reject) => {
                     wx.login({
                         success: (res) => resolve(res.code),
@@ -205,16 +207,22 @@ const NetworkUtil = {
                 if (result.error === 0) {
                     wx.setStorageSync(Constant.STORAGE_KEY_ACCESS_TOKEN, result.data.access_token)
                     wx.setStorageSync("mobile", result.data.mobile)
+                    console.log('token获取成功')
+                } else {
+                    throw new Error('登录失败：未返回access_token')
                 }
 
                 return result
             } catch (e) {
-                console.log(e)
+                console.error('getToken error:', e)
                 throw e
+            } finally {
+                // 请求完成后清空 tokenPromise，允许下次重新获取
+                tokenPromise = null
             }
         })()
 
-        return tokenPromise
+        return await tokenPromise
     },
 
     /**
