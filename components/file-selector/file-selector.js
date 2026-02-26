@@ -1,8 +1,8 @@
-const FileUtil = require("../../utils/FileUtil");
-const ImageUtil = require("../../utils/ImageUtil");
+const FileUtil = require("@/utils/FileUtil");
+const ImageUtil = require("@/utils/ImageUtil");
 const FileType = require("./util/FileType");
-const JSUtil = require("../../utils/JSUtil")
-const UploadUtil = require("../../utils/UploadUtil");
+const JSUtil = require("@/utils/JSUtil")
+const UploadUtil = require("@/utils/UploadUtil");
 // component/file-selector/file-selector.js
 Component({
     /**
@@ -209,7 +209,7 @@ Component({
                     }
                 })
 
-                this.setData({list: newList})
+                this.setData({ list: newList })
             }
 
             return this.data.list

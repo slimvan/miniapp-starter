@@ -1,6 +1,6 @@
 // component/photo-selector/photo-selector.js
-const ImageUtil = require("../../utils/ImageUtil")
-const UploadUtil = require("../../utils/UploadUtil")
+const ImageUtil = require("@/utils/ImageUtil")
+const UploadUtil = require("@/utils/UploadUtil")
 Component({
     /**
      * 组件的属性列表

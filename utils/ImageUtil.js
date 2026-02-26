@@ -1,5 +1,5 @@
-const Config = require('./Config')
-const FileUtil = require('./FileUtil')
+const Config = require('@/utils/Config')
+const FileUtil = require('@/utils/FileUtil')
 
 const ImageUtil = {
 
@@ -40,7 +40,7 @@ const ImageUtil = {
                 maxDuration: 10, // 视频拍摄时长默认10秒
                 sizeType: ['original', 'compressed'],
                 success: (res) => {
-                    const files = res.tempFiles.map(item => ({...item, path: item.tempFilePath}));
+                    const files = res.tempFiles.map(item => ({ ...item, path: item.tempFilePath }));
                     resolve(files);
                 },
                 fail: (err) => {
