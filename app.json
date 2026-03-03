@@ -23,19 +23,5 @@
             "defaultDisplayBlock": true,
             "defaultContentBox": true
         }
-    },
-    "subPackages": [
-        {
-            "root": "packageEvent",
-            "pages": [
-                "detail/detail",
-                "invite/invite",
-                "list/list",
-                "myEvent/myEvent",
-                "order/detail/detail",
-                "order/list/list",
-                "order/redeem/redeem"
-            ]
-        }
-    ]
+    }
 }
