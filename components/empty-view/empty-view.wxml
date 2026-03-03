@@ -1,2 +1,0 @@
-<!--component/empty-view/empty-view.wxml-->
-<t-empty image="{{image}}" description="{{description}}"/>

@@ -1,2 +1,0 @@
-<!--component/loading-view/loading-view.wxml-->
-<t-loading theme="spinner" text="加载中..."></t-loading>

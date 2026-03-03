@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "mp-html": "/components/mp-html/index"
+    "mp-html": "@xingyun-miniapp/components/mp-html/index"
   },
   "navigationBarBackgroundColor": "#ffffff"
 }

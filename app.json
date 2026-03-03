@@ -12,13 +12,10 @@
     "navigationBarTextStyle": "black",
     "backgroundColor": "#ffffff"
   },
-  
-  
   "resolveAlias": {
     "@/*": "/*"
   },
   "sitemapLocation": "sitemap.json",
-  
   "lazyCodeLoading": "requiredComponents",
   "rendererOptions": {
     "skyline": {
@@ -26,5 +23,6 @@
       "defaultDisplayBlock": true,
       "defaultContentBox": true
     }
-  }
+  },
+  "subPackages": []
 }

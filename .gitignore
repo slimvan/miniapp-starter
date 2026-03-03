@@ -1,7 +1,14 @@
+# 依赖与产物
+node_modules/
+miniprogram_npm/
+package-lock.json
+
+# 微信开发者工具产物
+project.private.config.json
 .eslintrc.js
 sitemap.json
-.idea/.gitignore
-.idea/MixcVillage.iml
-.idea/modules.xml
-.idea/watcherTasks.xml
-.idea/inspectionProfiles/Project_Default.xml
+
+# 编辑器与系统
+.idea/
+.DS_Store
+*.log
