@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@xingyun-miniapp/components": "1.0.0",
+    "@xingyun-miniapp/modules-event": "^1.0.4",
     "dayjs": "^1.11.13",
     "tdesign-miniprogram": "^1.9.7",
     "umtrack-wx": "^2.8.0"
