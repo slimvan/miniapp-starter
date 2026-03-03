@@ -3,8 +3,6 @@ node_modules/
 miniprogram_npm/
 package-lock.json
 
-# 业务分包目录（由 npm postinstall 自动同步，无需纳入版本管理）
-package*/
 
 # 微信开发者工具产物
 project.private.config.json
